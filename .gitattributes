@@ -1,0 +1,2 @@
+bin/fzf.exe filter=lfs diff=lfs merge=lfs -text
+bin/open-win.exe filter=lfs diff=lfs merge=lfs -text
