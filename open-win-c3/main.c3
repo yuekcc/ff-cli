@@ -5,7 +5,7 @@ import std::os::win32;
 
 const SW_SHOWNORMAL = 1;
 
-extern fn win32::Win32_HINSTANCE shellExecute(
+extern fn win32::Win32_HINSTANCE shellExecuteW(
 	win32::Win32_HWND hwnd, 
 	win32::Win32_LPCWSTR lpOperation, 
 	win32::Win32_LPCWSTR lpFile, 
@@ -17,7 +17,7 @@ extern fn win32::Win32_HINSTANCE shellExecute(
 fn bool openFile(String target) {
 	$if env::WIN32:
 		String operation = "open";
-		win32::Win32_HINSTANCE res = shellExecute(null, operation.to_temp_utf16()!!, target.to_temp_utf16()!!, null, null, SW_SHOWNORMAL);
+		win32::Win32_HINSTANCE res = shellExecuteW(null, operation.to_temp_utf16()!!, target.to_temp_utf16()!!, null, null, SW_SHOWNORMAL);
 		if (res > (win32::Win32_HINSTANCE)32) {
 			return true;
 		}
