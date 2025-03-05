@@ -1,5 +1,6 @@
 .{
-    .name = "open-win",
+    .name = .open_win,
+    .fingerprint = 0x225f1700f85d0a12,
     .version = "0.0.0",
     .paths = .{
         "build.zig",
