@@ -6,13 +6,13 @@ import std::os::win32;
 const SW_SHOWNORMAL = 1;
 
 extern fn win32::Win32_HINSTANCE shellExecuteW(
-	win32::Win32_HWND hwnd, 
-	win32::Win32_LPCWSTR lpOperation, 
-	win32::Win32_LPCWSTR lpFile, 
-	win32::Win32_LPCWSTR lpParameters, 
-	win32::Win32_LPCWSTR lpDirectory, 
+	win32::Win32_HWND hwnd,
+	win32::Win32_LPCWSTR lpOperation,
+	win32::Win32_LPCWSTR lpFile,
+	win32::Win32_LPCWSTR lpParameters,
+	win32::Win32_LPCWSTR lpDirectory,
 	win32::Win32_INT32 nShowCmd,
-) @extern("ShellExecuteW");
+) @cname("ShellExecuteW");
 
 fn bool openFile(String target) {
 	$if env::WIN32:
@@ -32,7 +32,7 @@ fn bool openFile(String target) {
 
 fn int main(int argc, char** argv) {
 	if (argc != 2) {
-		Path exe_name = path::new(ZString.str_view((ZString)argv[0]))!!;
+		Path exe_name = path::temp(	ZString.str_view((ZString)argv[0]))!!;
 		io::eprintfn("Usage: %s <FILE_PATH>", exe_name.basename());
 		return 1;
 	}
@@ -41,4 +41,3 @@ fn int main(int argc, char** argv) {
 	target_name = path::normalize(target_name)!!;
 	return openFile(target_name) ? 0 : 1;
 }
-
